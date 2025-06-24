@@ -1,30 +1,31 @@
 [project]
-name = "timy-frontend"
+name = "Timy"
 version = "0.1.0"
 description = ""
 readme = "README.md"
 requires-python = ">=3.9"
 authors = [
-    { name = "Flet developer", email = "you@example.com" }
+    { name = "Guilhermwn", email = "guilhermwn.franco@gmail.com" }
 ]
 dependencies = [
-  "flet==0.28.3"
+  "flet==0.28.3",
+  "requests>=2.32.4",
 ]
 
 [tool.flet]
 # org name in reverse domain name notation, e.g. "com.mycompany".
 # Combined with project.name to build bundle ID for iOS and Android apps
-org = "com.mycompany"
+org = "com.guilhermwn.timy"
 
 # project display name that is used as an app title on Android and iOS home screens,
 # shown in window titles and about app dialogs on desktop.
-product = "timy-frontend"
+product = "Timy"
 
 # company name to display in about app dialogs
-company = "Flet"
+company = "Guilhermwn"
 
 # copyright text to display in about app dialogs
-copyright = "Copyright (C) 2025 by Flet"
+copyright = "Copyright (C) 2025 by Guilhermwn"
 
 [tool.flet.app]
 path = "src"
@@ -32,8 +33,9 @@ path = "src"
 [tool.flet.android]
 split_per_abi = true
 
-[tool.flet.splash]
-android = false
+[tool.flet.android.signing]
+key_store = "C:/Users/Guilherme/Projects/Github/timy/timy-frontend/store.jks"
+key_alias = "timysignkey"
 
 [tool.uv]
 dev-dependencies = [

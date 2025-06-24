@@ -1,7 +1,7 @@
+from base64 import b64decode
 import os
 import tempfile
 from contextlib import asynccontextmanager
-from datetime import date
 from pathlib import Path
 from typing import Optional
 
@@ -14,14 +14,14 @@ from pydantic import BaseModel
 
 load_dotenv()
 
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("Starting connection")
-    cred_json = os.getenv("FIREBASE_CREDENTIAL_JSON")
-    if not cred_json:
+    cred_b64 = os.getenv("FIREBASE_CREDENTIAL_JSON")
+    if not cred_b64:
         raise RuntimeError("Variável FIREBASE_CREDENTIAL_JSON não definida")
 
+    cred_json = b64decode(cred_b64).decode("utf-8")
     with tempfile.NamedTemporaryFile("w+", delete=False, suffix=".json") as tmp:
         tmp.write(cred_json)
         tmp.flush()
@@ -91,4 +91,4 @@ def add_info(info: EntryModel):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("main:app", reload=True)
+    uvicorn.run("main:app", reload=True, host="192.168.1.5")

@@ -6,8 +6,11 @@ certifi==2025.6.15
     # via
     #   httpcore
     #   httpx
+    #   requests
+charset-normalizer==3.4.2
+    # via requests
 flet==0.28.3
-    # via timy-frontend (./pyproject.toml)
+    # via timy (./pyproject.toml)
 h11==0.16.0
     # via httpcore
 httpcore==1.0.9
@@ -18,13 +21,18 @@ idna==3.10
     # via
     #   anyio
     #   httpx
+    #   requests
 oauthlib==3.3.1
     # via flet
 repath==0.9.0
     # via flet
+requests==2.32.4
+    # via timy (./pyproject.toml)
 six==1.17.0
     # via repath
 sniffio==1.3.1
     # via anyio
 typing-extensions==4.14.0
     # via anyio
+urllib3==2.5.0
+    # via requests
