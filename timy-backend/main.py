@@ -91,4 +91,4 @@ def add_info(info: EntryModel):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("main:app", reload=True, host="192.168.1.5")
+    uvicorn.run("main:app")
