@@ -48,7 +48,7 @@ class EntrySchema(Model):
     chegada_casa = TextField()
 
     class Meta:
-        collection_name = "Timings"
+        collection_name = "Timy"
 
 
 class EntryModel(BaseModel):
