@@ -1,6 +1,6 @@
-from base64 import b64decode
 import os
 import tempfile
+from base64 import b64decode
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Optional
@@ -8,11 +8,13 @@ from typing import Optional
 import fireo
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fireo.fields import TextField
 from fireo.models import Model
 from pydantic import BaseModel
 
 load_dotenv()
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -35,6 +37,14 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class EntrySchema(Model):
     data = TextField()
