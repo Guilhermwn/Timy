@@ -141,7 +141,7 @@ class Timy(ft.Container):
     def did_mount(self):
         self.backend_link = self.page.client_storage.get("backend-link")
         try:
-            ping = requests.get(f"{self.backend_link}/ping", timeout=2)
+            ping = requests.get(f"{self.backend_link}/ping")
             if ping.status_code == 200:
                 if ping.text.strip('"') == "pong":
                     self.page.open(
