@@ -46,6 +46,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 class EntrySchema(Model):
     data = TextField()
     saida_casa = TextField()
@@ -58,7 +59,7 @@ class EntrySchema(Model):
     chegada_casa = TextField()
 
     class Meta:
-        collection_name = "Timings"
+        collection_name = "Timy"
 
 
 class EntryModel(BaseModel):
@@ -97,8 +98,15 @@ def add_info(info: EntryModel):
         e.save()
         return {"key": e.key, "activity": "Adicionado"}
 
+@app.get("/list")
+def list():
+    list = EntrySchema.collection.fetch()
+    return [{"data":item.data} for item in list]
+        
+        
+
 
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("main:app")
+    uvicorn.run("main:app", reload=True)
