@@ -4,7 +4,8 @@ import requests
 
 os.system("cls")
 
-link = "http://127.0.0.1:8000"
+links = ["http://127.0.0.1:8000", "https://timy-psi.vercel.app"]
+link = links[1]
 
 def show(info: requests.Response):
     print("---------------")
