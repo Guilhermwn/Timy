@@ -5,4 +5,5 @@ with open("mygui.json") as f:
 
 encoded = base64.b64encode(data)
 
-print(encoded)
+with open("credentials.txt", "w") as f:
+    f.write(encoded.decode())
