@@ -7,6 +7,7 @@ import firebase_admin
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from firebase_admin import credentials, firestore
+from google.cloud.firestore_v1.base_query import FieldFilter
 from pydantic import BaseModel
 
 load_dotenv()
@@ -23,7 +24,10 @@ except ValueError:
 db = firestore.client()
 
 # Create FastAPI instance
-app = FastAPI()
+app = FastAPI(
+    title="Timy",
+    redoc_url=None
+)
 
 
 class Timy(BaseModel):
@@ -51,11 +55,29 @@ def ping_pong():
     return "pong"
 
 
-@app.post("/add", response_model=Timy)
+@app.post("/add")
 def add_info(entry: Timy):
+    collection = db.collection("timy")
     new_entry = {k: v for k, v in entry.model_dump().items() if v}
-    doc_ref = db.collection("timy").add(new_entry)
-    return new_entry
+
+    present = collection.where(filter=FieldFilter("data", "==", new_entry["data"])).stream()
+    present_data = [data for data in present]
+
+    if present_data:
+        collection.document(present_data[0].id).update(new_entry)
+        response = {
+            "activity": "updated",
+            "present": present_data[0].to_dict(),
+            "request": new_entry
+        }
+    else:
+        collection.add(new_entry)
+        response = {
+            "activity": "added",
+            "request": new_entry
+        }
+
+    return response
 
 
 if __name__ == "__main__":

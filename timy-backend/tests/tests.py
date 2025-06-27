@@ -5,7 +5,7 @@ import requests
 os.system("cls")
 
 links = ["http://127.0.0.1:8000", "https://timy-psi.vercel.app"]
-link = links[1]
+link = links[0]
 
 def show(info: requests.Response):
     print("---------------")
@@ -24,9 +24,8 @@ test_json = [
     {"data":"2025-06-25", "saida_DIA1":"08:15:00"},
 ]
 e3 = requests.post(f"{link}/add", json=random.choice(test_json))
-e4 = requests.get(f"{link}/list")
+
 
 show(e1)
 show(e2)
 show(e3)
-show(e4)
