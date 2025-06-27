@@ -161,3 +161,6 @@ cython_debug/
 
 # Flet
 storage/
+
+# User defined
+sign.txt
