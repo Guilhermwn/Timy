@@ -82,7 +82,7 @@ class Timy(ft.Container):
                                     weight=ft.FontWeight.W_500,
                                 ),
                                 bgcolor=ft.Colors.GREEN
-                                if response_text["activity"] == "Adicionado"
+                                if response_text["activity"] == "added"
                                 else ft.Colors.ORANGE,
                             )
                         )
@@ -154,7 +154,10 @@ class Timy(ft.Container):
                 else:
                     self.page.open(
                         ft.SnackBar(
-                            ft.Text(f"Backend inadequado, resposta da requisição: {ping.text}", weight=ft.FontWeight.W_500),
+                            ft.Text(
+                                f"Backend inadequado, resposta da requisição: {ping.text}",
+                                weight=ft.FontWeight.W_500,
+                            ),
                             bgcolor=ft.Colors.RED,
                             duration=5000,
                         )
